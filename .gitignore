@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# AI coding-tool artifacts — never committed
+.claude
+.z-ai-config
+CLAUDE.md
