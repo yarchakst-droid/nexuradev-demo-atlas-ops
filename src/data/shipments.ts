@@ -1,0 +1,191 @@
+import type { LocalizedText, Shipment, ShipmentStatus, TimelineEvent } from "@/lib/types";
+
+const tt = (uk: string, en: string, ru: string): LocalizedText => ({ uk, en, ru });
+
+const CITIES: Record<string, LocalizedText> = {
+  Київ: tt("Київ", "Kyiv", "Киев"),
+  Львів: tt("Львів", "Lviv", "Львов"),
+  Одеса: tt("Одеса", "Odesa", "Одесса"),
+  Харків: tt("Харків", "Kharkiv", "Харьков"),
+  Дніпро: tt("Дніпро", "Dnipro", "Днепр"),
+  Полтава: tt("Полтава", "Poltava", "Полтава"),
+  Вінниця: tt("Вінниця", "Vinnytsia", "Винница"),
+  Тернопіль: tt("Тернопіль", "Ternopil", "Тернополь"),
+  "Кривий Ріг": tt("Кривий Ріг", "Kryvyi Rih", "Кривой Рог"),
+  Житомир: tt("Житомир", "Zhytomyr", "Житомир"),
+  Рівне: tt("Рівне", "Rivne", "Ровно"),
+};
+
+const STOPS: LocalizedText[] = [
+  tt("Завантаження", "Loading", "Погрузка"),
+  tt("В дорозі", "In transit", "В пути"),
+  tt("Проміжний пункт", "Waypoint", "Промежуточный пункт"),
+  tt("Прибуття", "Arrival", "Прибытие"),
+];
+
+function buildTimeline(
+  status: ShipmentStatus,
+  progressPercent: number,
+  hoursAgoStart: number,
+): TimelineEvent[] {
+  const now = Date.now();
+  const doneSteps =
+    status === "delivered" ? 4 : Math.max(1, Math.round((progressPercent / 100) * 3) + 1);
+
+  return STOPS.map((label, i) => {
+    const done = i < doneSteps;
+    const time = done
+      ? new Date(now - (hoursAgoStart - i * (hoursAgoStart / 4)) * 3_600_000).toISOString()
+      : "";
+    return { label, time, done };
+  });
+}
+
+const iso = (hoursFromNow: number) => new Date(Date.now() + hoursFromNow * 3_600_000).toISOString();
+
+export const shipments: Shipment[] = [
+  {
+    id: "s1",
+    code: "AO-10231",
+    origin: CITIES["Київ"],
+    destination: CITIES["Львів"],
+    driverId: "d1",
+    status: "on-time",
+    eta: iso(3.2),
+    distanceKm: 540,
+    cargo: tt("Будівельні матеріали, 12 палет", "Construction materials, 12 pallets", "Стройматериалы, 12 паллет"),
+    progressPercent: 62,
+    delayMinutes: 0,
+    updatedAt: iso(-0.1),
+    route: { origin: { x: 760, y: 150 }, destination: { x: 180, y: 260 }, control: { x: 460, y: 80 } },
+    timeline: buildTimeline("on-time", 62, 6),
+  },
+  {
+    id: "s2",
+    code: "AO-10232",
+    origin: CITIES["Одеса"],
+    destination: CITIES["Харків"],
+    driverId: "d2",
+    status: "delayed",
+    eta: iso(4.8),
+    distanceKm: 700,
+    cargo: tt("Продукти харчування, рефрижератор", "Food products, refrigerated", "Продукты питания, рефрижератор"),
+    progressPercent: 38,
+    delayMinutes: 95,
+    updatedAt: iso(-0.2),
+    route: { origin: { x: 420, y: 520 }, destination: { x: 830, y: 180 }, control: { x: 700, y: 520 } },
+    timeline: buildTimeline("delayed", 38, 8),
+  },
+  {
+    id: "s3",
+    code: "AO-10233",
+    origin: CITIES["Дніпро"],
+    destination: CITIES["Полтава"],
+    driverId: "d3",
+    status: "critical",
+    eta: iso(-1.5),
+    distanceKm: 200,
+    cargo: tt("Медичне обладнання", "Medical equipment", "Медицинское оборудование"),
+    progressPercent: 44,
+    delayMinutes: 210,
+    updatedAt: iso(-0.05),
+    route: { origin: { x: 680, y: 340 }, destination: { x: 520, y: 180 }, control: { x: 650, y: 150 } },
+    timeline: buildTimeline("critical", 44, 5),
+  },
+  {
+    id: "s4",
+    code: "AO-10234",
+    origin: CITIES["Київ"],
+    destination: CITIES["Вінниця"],
+    driverId: "d4",
+    status: "on-time",
+    eta: iso(1.6),
+    distanceKm: 260,
+    cargo: tt("Побутова техніка, 6 палет", "Home appliances, 6 pallets", "Бытовая техника, 6 паллет"),
+    progressPercent: 78,
+    delayMinutes: 0,
+    updatedAt: iso(-0.1),
+    route: { origin: { x: 760, y: 150 }, destination: { x: 340, y: 340 }, control: { x: 480, y: 150 } },
+    timeline: buildTimeline("on-time", 78, 4),
+  },
+  {
+    id: "s5",
+    code: "AO-10235",
+    origin: CITIES["Львів"],
+    destination: CITIES["Тернопіль"],
+    driverId: "d5",
+    status: "delivered",
+    eta: iso(-2.1),
+    distanceKm: 130,
+    cargo: tt("Текстиль, 4 палети", "Textiles, 4 pallets", "Текстиль, 4 паллеты"),
+    progressPercent: 100,
+    delayMinutes: 0,
+    updatedAt: iso(-2.1),
+    route: { origin: { x: 180, y: 260 }, destination: { x: 340, y: 300 }, control: { x: 250, y: 400 } },
+    timeline: buildTimeline("delivered", 100, 3),
+  },
+  {
+    id: "s6",
+    code: "AO-10236",
+    origin: CITIES["Харків"],
+    destination: CITIES["Полтава"],
+    driverId: "d6",
+    status: "on-time",
+    eta: iso(2.4),
+    distanceKm: 145,
+    cargo: tt("Друкована продукція", "Printed materials", "Печатная продукция"),
+    progressPercent: 55,
+    delayMinutes: 0,
+    updatedAt: iso(-0.15),
+    route: { origin: { x: 830, y: 180 }, destination: { x: 520, y: 180 }, control: { x: 680, y: 60 } },
+    timeline: buildTimeline("on-time", 55, 3.5),
+  },
+  {
+    id: "s7",
+    code: "AO-10237",
+    origin: CITIES["Одеса"],
+    destination: CITIES["Вінниця"],
+    driverId: "d7",
+    status: "delayed",
+    eta: iso(3.9),
+    distanceKm: 420,
+    cargo: tt("Автозапчастини", "Auto parts", "Автозапчасти"),
+    progressPercent: 21,
+    delayMinutes: 50,
+    updatedAt: iso(-0.3),
+    route: { origin: { x: 420, y: 520 }, destination: { x: 340, y: 340 }, control: { x: 300, y: 480 } },
+    timeline: buildTimeline("delayed", 21, 5.5),
+  },
+  {
+    id: "s8",
+    code: "AO-10238",
+    origin: CITIES["Дніпро"],
+    destination: CITIES["Кривий Ріг"],
+    driverId: "d8",
+    status: "on-time",
+    eta: iso(0.9),
+    distanceKm: 145,
+    cargo: tt("Металопрокат", "Rolled metal", "Металлопрокат"),
+    progressPercent: 84,
+    delayMinutes: 0,
+    updatedAt: iso(-0.05),
+    route: { origin: { x: 680, y: 340 }, destination: { x: 560, y: 420 }, control: { x: 660, y: 450 } },
+    timeline: buildTimeline("on-time", 84, 2.5),
+  },
+  {
+    id: "s9",
+    code: "AO-10239",
+    origin: CITIES["Житомир"],
+    destination: CITIES["Рівне"],
+    driverId: "d9",
+    status: "critical",
+    eta: iso(-0.6),
+    distanceKm: 160,
+    cargo: tt("Швидкопсувний вантаж", "Perishable cargo", "Скоропортящийся груз"),
+    progressPercent: 30,
+    delayMinutes: 130,
+    updatedAt: iso(-0.1),
+    route: { origin: { x: 300, y: 220 }, destination: { x: 160, y: 150 }, control: { x: 260, y: 100 } },
+    timeline: buildTimeline("critical", 30, 4),
+  },
+];
