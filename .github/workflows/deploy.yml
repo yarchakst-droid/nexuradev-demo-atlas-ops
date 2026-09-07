@@ -1,0 +1,21 @@
+name: Deploy to nexura-server
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - run: npx pm2 startOrReload ecosystem.config.js --update-env
