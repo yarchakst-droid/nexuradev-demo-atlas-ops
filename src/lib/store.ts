@@ -29,10 +29,6 @@ export function getVehicles(): Vehicle[] {
   return vehicleStore();
 }
 
-export function getVehicle(id: string): Vehicle | undefined {
-  return vehicleStore().find((v) => v.id === id);
-}
-
 const ALLOWED_VEHICLE_STATUSES: VehicleStatus[] = ["in-service", "available", "maintenance"];
 
 export type UpdateVehicleStatusResult =

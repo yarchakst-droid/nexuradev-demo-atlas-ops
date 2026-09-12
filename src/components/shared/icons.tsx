@@ -42,27 +42,10 @@ export function ClockIcon({ className }: IconProps) {
   );
 }
 
-export function MapPinIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
-      <path d="M12 21s-6.5-5.7-6.5-11A6.5 6.5 0 0 1 18.5 10c0 5.3-6.5 11-6.5 11Z" strokeLinejoin="round" />
-      <circle cx="12" cy="10" r="2.2" />
-    </svg>
-  );
-}
-
 export function ChevronRightIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
       <path d="m9 6 6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-export function ArrowLeftIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
-      <path d="M19 12H5M11 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -101,16 +84,6 @@ export function PackageIcon({ className }: IconProps) {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
       <path d="M3.5 7.5 12 3l8.5 4.5v9L12 21l-8.5-4.5v-9Z" strokeLinejoin="round" />
       <path d="M3.5 7.5 12 12l8.5-4.5M12 12v9" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-export function RouteIcon({ className }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
-      <circle cx="6" cy="6" r="2.2" />
-      <circle cx="18" cy="18" r="2.2" />
-      <path d="M7.8 7.5c0 5 8.4 4.5 8.4 9" strokeLinecap="round" strokeDasharray="2.5 2.5" />
     </svg>
   );
 }
