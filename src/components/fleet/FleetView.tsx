@@ -49,6 +49,8 @@ export default function FleetView() {
       const data = await res.json();
       if (!res.ok) return;
       setVehicles((prev) => prev!.map((v) => (v.id === id ? { ...v, status: data.vehicle.status } : v)));
+    } catch (err) {
+      console.error("Failed to update vehicle status", err);
     } finally {
       setTogglingId(null);
     }
