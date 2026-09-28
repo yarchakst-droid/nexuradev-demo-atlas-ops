@@ -38,7 +38,7 @@ export default function LoginScreen({ onSuccess }: { onSuccess: () => void }) {
 
   return (
     <div className="grid min-h-screen w-full lg:grid-cols-[1fr_1.1fr]">
-      <aside className="hidden flex-col items-center justify-center border-r border-border bg-bg-panel px-10 py-16 lg:flex">
+      <aside className="hidden flex-col items-center justify-center border-r border-[#132338] bg-[#0a1420] px-10 py-16 lg:flex">
         <span className="flex size-16 items-center justify-center rounded-2xl bg-accent-soft text-accent ring-1 ring-inset ring-accent/20">
           <LogoMark className="size-8" />
         </span>
