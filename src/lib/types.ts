@@ -33,11 +33,16 @@ export interface Shipment {
   updatedAt: string;
   route: RouteGeometry;
   timeline: TimelineEvent[];
+  /** Client company being billed for this shipment — powers the Billing tab. */
+  client: string;
+  /** Freight revenue in UAH — powers the dashboard's finance charts and Billing tab. */
+  revenue: number;
 }
 
 export interface Driver {
   id: string;
   name: string;
+  /** Unsplash portrait URL, or "" for a newly added driver — falls back to an initials avatar. */
   avatar: string;
   vehicle: string;
   plate: string;
@@ -63,4 +68,41 @@ export interface Vehicle {
   nextServiceKm: number;
   status: VehicleStatus;
   driverId: string | null;
+}
+
+export type ScheduledTripStatus = "unassigned" | "assigned";
+
+export interface ScheduledTrip {
+  id: string;
+  code: string;
+  origin: LocalizedText;
+  destination: LocalizedText;
+  cargo: LocalizedText;
+  distanceKm: number;
+  scheduledAt: string;
+  status: ScheduledTripStatus;
+  driverId: string | null;
+  vehicleId: string | null;
+}
+
+export type MessageSender = "dispatcher" | "driver";
+
+export interface ChatMessage {
+  id: string;
+  driverId: string;
+  from: MessageSender;
+  text: string;
+  sentAt: string;
+}
+
+export type InvoiceStatus = "paid" | "pending" | "overdue";
+
+export interface Invoice {
+  shipmentId: string;
+  code: string;
+  client: string;
+  destination: LocalizedText;
+  amount: number;
+  status: InvoiceStatus;
+  issuedAt: string;
 }

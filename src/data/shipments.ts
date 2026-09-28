@@ -1,8 +1,8 @@
 import type { LocalizedText, Shipment, ShipmentStatus, TimelineEvent } from "@/lib/types";
 
-const tt = (uk: string, en: string, ru: string): LocalizedText => ({ uk, en, ru });
+export const tt = (uk: string, en: string, ru: string): LocalizedText => ({ uk, en, ru });
 
-const CITIES: Record<string, LocalizedText> = {
+export const CITIES: Record<string, LocalizedText> = {
   Київ: tt("Київ", "Kyiv", "Киев"),
   Львів: tt("Львів", "Lviv", "Львов"),
   Одеса: tt("Одеса", "Odesa", "Одесса"),
@@ -59,6 +59,8 @@ export const shipments: Shipment[] = [
     updatedAt: iso(-0.1),
     route: { origin: { x: 760, y: 150 }, destination: { x: 180, y: 260 }, control: { x: 460, y: 80 } },
     timeline: buildTimeline("on-time", 62, 6),
+    client: "ТОВ «Будмайстер»",
+    revenue: 46800,
   },
   {
     id: "s2",
@@ -75,6 +77,8 @@ export const shipments: Shipment[] = [
     updatedAt: iso(-0.2),
     route: { origin: { x: 420, y: 520 }, destination: { x: 830, y: 180 }, control: { x: 700, y: 520 } },
     timeline: buildTimeline("delayed", 38, 8),
+    client: "ТОВ «Агропродсервіс»",
+    revenue: 68000,
   },
   {
     id: "s3",
@@ -91,6 +95,8 @@ export const shipments: Shipment[] = [
     updatedAt: iso(-0.05),
     route: { origin: { x: 680, y: 340 }, destination: { x: 520, y: 180 }, control: { x: 650, y: 150 } },
     timeline: buildTimeline("critical", 44, 5),
+    client: "КНП «Полтавська обласна лікарня»",
+    revenue: 54000,
   },
   {
     id: "s4",
@@ -107,6 +113,8 @@ export const shipments: Shipment[] = [
     updatedAt: iso(-0.1),
     route: { origin: { x: 760, y: 150 }, destination: { x: 340, y: 340 }, control: { x: 480, y: 150 } },
     timeline: buildTimeline("on-time", 78, 4),
+    client: "ТОВ «ТехноСвіт»",
+    revenue: 31200,
   },
   {
     id: "s5",
@@ -123,6 +131,8 @@ export const shipments: Shipment[] = [
     updatedAt: iso(-2.1),
     route: { origin: { x: 180, y: 260 }, destination: { x: 340, y: 300 }, control: { x: 250, y: 400 } },
     timeline: buildTimeline("delivered", 100, 3),
+    client: "ПП «Текстиль Плюс»",
+    revenue: 15600,
   },
   {
     id: "s6",
@@ -139,6 +149,8 @@ export const shipments: Shipment[] = [
     updatedAt: iso(-0.15),
     route: { origin: { x: 830, y: 180 }, destination: { x: 520, y: 180 }, control: { x: 680, y: 60 } },
     timeline: buildTimeline("on-time", 55, 3.5),
+    client: "Видавництво «Слово»",
+    revenue: 17400,
   },
   {
     id: "s7",
@@ -155,6 +167,8 @@ export const shipments: Shipment[] = [
     updatedAt: iso(-0.3),
     route: { origin: { x: 420, y: 520 }, destination: { x: 340, y: 340 }, control: { x: 300, y: 480 } },
     timeline: buildTimeline("delayed", 21, 5.5),
+    client: "ТОВ «АвтоДеталь»",
+    revenue: 42000,
   },
   {
     id: "s8",
@@ -171,6 +185,8 @@ export const shipments: Shipment[] = [
     updatedAt: iso(-0.05),
     route: { origin: { x: 680, y: 340 }, destination: { x: 560, y: 420 }, control: { x: 660, y: 450 } },
     timeline: buildTimeline("on-time", 84, 2.5),
+    client: "ПрАТ «Металопром»",
+    revenue: 26100,
   },
   {
     id: "s9",
@@ -187,5 +203,7 @@ export const shipments: Shipment[] = [
     updatedAt: iso(-0.1),
     route: { origin: { x: 300, y: 220 }, destination: { x: 160, y: 150 }, control: { x: 260, y: 100 } },
     timeline: buildTimeline("critical", 30, 4),
+    client: "ТОВ «Свіжий Ринок»",
+    revenue: 24000,
   },
 ];

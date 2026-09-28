@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import Avatar from "@/components/shared/Avatar";
 import { PhoneIcon } from "@/components/shared/icons";
 import { DriverStatusBadge } from "@/components/shared/StatusBadge";
 import { useLang } from "@/i18n/LangContext";
@@ -13,11 +13,14 @@ export default function DriverMiniCard({ driver }: { driver: Driver }) {
     <div className="panel rounded-2xl border border-border p-4">
       <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-muted">{t.routeDetail.driverLabel}</p>
       <div className="flex items-center gap-3">
-        <span className="relative block size-12 shrink-0 overflow-hidden rounded-full ring-2 ring-accent/25 ring-offset-2 ring-offset-bg-panel">
-          <Image src={driver.avatar} alt={driver.name} fill sizes="48px" className="object-cover" />
-        </span>
+        <Avatar
+          src={driver.avatar}
+          name={driver.name}
+          sizePx={48}
+          className="size-12 ring-2 ring-accent/25 ring-offset-2 ring-offset-bg-panel"
+        />
         <div className="min-w-0">
-          <Link href="/drivers" className="block truncate text-sm font-medium text-text hover:text-accent">
+          <Link href={`/drivers/${driver.id}`} className="block truncate text-sm font-medium text-text hover:text-accent">
             {driver.name}
           </Link>
           <p className="truncate text-xs text-text-muted">{driver.vehicle}</p>

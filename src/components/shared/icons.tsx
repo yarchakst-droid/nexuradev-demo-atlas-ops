@@ -179,3 +179,114 @@ export function WrenchIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+/** Atlas Ops brand mark — a compass rose, echoing the CompassIcon used on the route
+ * schematic so the logo and the product's own visual language stay the same idea. */
+export function LogoMark({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M15.5 8.5 13 13l-4.5 2.5L11 11l4.5-2.5Z" strokeLinejoin="round" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" />
+      <path d="M12 3v1.6M12 19.4V21M3 12h1.6M19.4 12H21" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function WalletIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
+      <path d="M4 7.5A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-9Z" strokeLinejoin="round" />
+      <path d="M4 9.5h16" />
+      <path d="M15 14h2.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function ChatIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
+      <path
+        d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 3.5V16H6.5A2.5 2.5 0 0 1 4 13.5v-7Z"
+        strokeLinejoin="round"
+      />
+      <path d="M8 8.8h8M8 11.8h5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function RadarIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
+      <circle cx="12" cy="12" r="8.5" />
+      <circle cx="12" cy="12" r="5" strokeOpacity="0.55" />
+      <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none" />
+      <path d="M12 12 17 7.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function CalendarIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
+      <rect x="4" y="5.5" width="16" height="14.5" rx="2" />
+      <path d="M4 9.5h16M8 3.5v3M16 3.5v3" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function PlusIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className={className}>
+      <path d="M12 5v14M5 12h14" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function LogoutIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
+      <path d="M9 4.5H6.5A1.5 1.5 0 0 0 5 6v12a1.5 1.5 0 0 0 1.5 1.5H9" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M14 8l4 4-4 4M18 12H9" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function LockIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
+      <rect x="5" y="10.5" width="14" height="9.5" rx="2" />
+      <path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function UserIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
+      <circle cx="12" cy="8.5" r="3.3" />
+      <path d="M4.5 20c0-3.3 2.9-5.8 7.5-5.8s7.5 2.5 7.5 5.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function EyeIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
+      <path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z" strokeLinejoin="round" />
+      <circle cx="12" cy="12" r="2.6" />
+    </svg>
+  );
+}
+
+export function EyeOffIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={w} className={className}>
+      <path
+        d="M4 4l16 16M9.9 5.6C10.6 5.5 11.3 5.5 12 5.5c6 0 9.5 6.5 9.5 6.5a15 15 0 0 1-3 3.9M6.5 7.6A15.4 15.4 0 0 0 2.5 12S6 18.5 12 18.5c1.3 0 2.5-.3 3.6-.8M9.9 10a2.6 2.6 0 0 0 3.6 3.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

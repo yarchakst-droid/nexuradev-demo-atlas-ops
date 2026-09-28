@@ -2,16 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect } from "react";
-import { ChartBarIcon, GaugeIcon, TruckIcon, UsersIcon, XIcon } from "@/components/shared/icons";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import {
+  CalendarIcon,
+  ChartBarIcon,
+  ChatIcon,
+  GaugeIcon,
+  LogoMark,
+  LogoutIcon,
+  RadarIcon,
+  TruckIcon,
+  UsersIcon,
+  WalletIcon,
+  XIcon,
+} from "@/components/shared/icons";
 import { useLang } from "@/i18n/LangContext";
 import { useSidebar } from "@/lib/sidebar-context";
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
   const { t } = useLang();
   const { isOpen, close } = useSidebar();
+  const [loggingOut, setLoggingOut] = useState(false);
 
   // Close the mobile drawer whenever the route changes (link taps should
   // dismiss the overlay instead of leaving it open behind the new page).
@@ -30,25 +44,44 @@ export default function Sidebar() {
     };
   }, [isOpen]);
 
-  const links = [
-    { href: "/", label: t.sidebar.dashboard, icon: GaugeIcon, match: (p: string) => p === "/" },
+  async function handleLogout() {
+    setLoggingOut(true);
+    await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
+    router.push("/login");
+    router.refresh();
+  }
+
+  const groups = [
     {
-      href: "/drivers",
-      label: t.sidebar.drivers,
-      icon: UsersIcon,
-      match: (p: string) => p.startsWith("/drivers"),
+      label: t.sidebar.overview,
+      links: [{ href: "/", label: t.sidebar.dashboard, icon: GaugeIcon, match: (p: string) => p === "/" }],
     },
     {
-      href: "/fleet",
-      label: t.sidebar.fleet,
-      icon: TruckIcon,
-      match: (p: string) => p.startsWith("/fleet"),
+      label: t.sidebar.operations,
+      links: [
+        { href: "/drivers", label: t.sidebar.drivers, icon: UsersIcon, match: (p: string) => p.startsWith("/drivers") },
+        { href: "/fleet", label: t.sidebar.fleet, icon: TruckIcon, match: (p: string) => p.startsWith("/fleet") },
+        {
+          href: "/scheduled",
+          label: t.sidebar.scheduled,
+          icon: CalendarIcon,
+          match: (p: string) => p.startsWith("/scheduled"),
+        },
+        { href: "/tracker", label: t.sidebar.tracker, icon: RadarIcon, match: (p: string) => p.startsWith("/tracker") },
+        {
+          href: "/messenger",
+          label: t.sidebar.messenger,
+          icon: ChatIcon,
+          match: (p: string) => p.startsWith("/messenger"),
+        },
+      ],
     },
     {
-      href: "/reports",
-      label: t.sidebar.reports,
-      icon: ChartBarIcon,
-      match: (p: string) => p.startsWith("/reports"),
+      label: t.sidebar.finance,
+      links: [
+        { href: "/billing", label: t.sidebar.billing, icon: WalletIcon, match: (p: string) => p.startsWith("/billing") },
+        { href: "/reports", label: t.sidebar.reports, icon: ChartBarIcon, match: (p: string) => p.startsWith("/reports") },
+      ],
     },
   ];
 
@@ -68,7 +101,7 @@ export default function Sidebar() {
       >
       <div className="flex items-center gap-3 border-b border-border px-5 py-5">
         <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent ring-1 ring-inset ring-accent/20">
-          <TruckIcon className="size-4.5" />
+          <LogoMark className="size-5" />
         </span>
         <div className="min-w-0 flex-1">
           <p className="text-sm font-semibold tracking-tight text-text">{t.sidebar.dispatch}</p>
@@ -84,33 +117,35 @@ export default function Sidebar() {
         </button>
       </div>
 
-      <nav className="flex flex-col gap-0.5 px-3 py-4">
-        <p className="px-2.5 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-text-muted">
-          {t.sidebar.overview}
-        </p>
-        {links.map(({ href, label, icon: Icon, match }) => {
-          const active = match(pathname);
-          return (
-            <Link
-              key={href}
-              href={href}
-              className={`pressable group relative flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm ${
-                active
-                  ? "bg-accent-soft text-accent"
-                  : "text-text-soft hover:bg-bg-hover hover:text-text"
-              }`}
-            >
-              {active && (
-                <span className="absolute left-0 top-1/2 h-4 w-0.5 -translate-y-1/2 rounded-full bg-accent" />
-              )}
-              <Icon className={`size-4 ${active ? "" : "text-text-muted group-hover:text-text-soft"}`} />
-              {label}
-            </Link>
-          );
-        })}
+      <nav className="flex flex-1 flex-col gap-4 overflow-y-auto px-3 py-4">
+        {groups.map((group) => (
+          <div key={group.label} className="flex flex-col gap-0.5">
+            <p className="px-2.5 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-text-muted">
+              {group.label}
+            </p>
+            {group.links.map(({ href, label, icon: Icon, match }) => {
+              const active = match(pathname);
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={`pressable group relative flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm ${
+                    active ? "bg-accent-soft text-accent" : "text-text-soft hover:bg-bg-hover hover:text-text"
+                  }`}
+                >
+                  {active && (
+                    <span className="absolute left-0 top-1/2 h-4 w-0.5 -translate-y-1/2 rounded-full bg-accent" />
+                  )}
+                  <Icon className={`size-4 ${active ? "" : "text-text-muted group-hover:text-text-soft"}`} />
+                  {label}
+                </Link>
+              );
+            })}
+          </div>
+        ))}
       </nav>
 
-      <div className="mt-auto flex items-center gap-2.5 border-t border-border px-4 py-4">
+      <div className="flex items-center gap-2.5 border-t border-border px-4 py-4">
         <span className="relative block size-8 shrink-0 overflow-hidden rounded-full ring-2 ring-on-time/30">
           <Image
             src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?auto=format&fit=crop&w=64&h=64&q=80"
@@ -127,9 +162,19 @@ export default function Sidebar() {
             {t.sidebar.online}
           </p>
         </div>
+        <button
+          type="button"
+          onClick={handleLogout}
+          disabled={loggingOut}
+          aria-label={t.sidebar.logout}
+          className="pressable flex size-8 shrink-0 items-center justify-center rounded-md text-text-muted hover:bg-bg-hover hover:text-text disabled:opacity-50"
+        >
+          <LogoutIcon className="size-4" />
+        </button>
       </div>
 
-      <p className="border-t border-border px-4 py-3 text-center text-[10px] leading-relaxed text-text-muted">
+      <p className="flex items-center justify-center gap-1.5 border-t border-border px-4 py-3 text-center text-[10px] leading-relaxed text-text-muted">
+        <span className="size-1.5 rounded-full bg-delayed" />
         {t.sidebar.demoNotice}
       </p>
       </aside>

@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import Avatar from "@/components/shared/Avatar";
 import { ShipmentStatusBadge } from "@/components/shared/StatusBadge";
 import { ChevronRightIcon } from "@/components/shared/icons";
 import { useLang } from "@/i18n/LangContext";
@@ -82,14 +82,13 @@ export default function ShipmentsTable({
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
-                    {s.driverAvatar && (
-                      <span
-                        className="relative block size-6 shrink-0 overflow-hidden rounded-full ring-1"
-                        style={{ boxShadow: `0 0 0 1px color-mix(in srgb, ${color} 45%, transparent)` }}
-                      >
-                        <Image src={s.driverAvatar} alt={s.driverName} fill sizes="24px" className="object-cover" />
-                      </span>
-                    )}
+                    <Avatar
+                      src={s.driverAvatar}
+                      name={s.driverName}
+                      sizePx={24}
+                      className="size-6 ring-1"
+                      style={{ boxShadow: `0 0 0 1px color-mix(in srgb, ${color} 45%, transparent)` }}
+                    />
                     <span className="text-text-soft">{s.driverName}</span>
                   </div>
                 </td>

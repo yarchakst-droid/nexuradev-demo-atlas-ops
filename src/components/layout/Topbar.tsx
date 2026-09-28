@@ -1,17 +1,21 @@
 "use client";
 
-import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import Avatar from "@/components/shared/Avatar";
 import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
 import {
   BellIcon,
+  CalendarIcon,
   ChartBarIcon,
+  ChatIcon,
   GaugeIcon,
   MenuIcon,
+  RadarIcon,
   SearchIcon,
   TruckIcon,
   UsersIcon,
+  WalletIcon,
 } from "@/components/shared/icons";
 import { DriverStatusBadge, ShipmentStatusBadge, VehicleStatusBadge } from "@/components/shared/StatusBadge";
 import type { Dictionary } from "@/i18n/dictionary";
@@ -113,6 +117,10 @@ export default function Topbar() {
     { href: "/", label: t.sidebar.dashboard, icon: GaugeIcon },
     { href: "/drivers", label: t.sidebar.drivers, icon: UsersIcon },
     { href: "/fleet", label: t.sidebar.fleet, icon: TruckIcon },
+    { href: "/scheduled", label: t.sidebar.scheduled, icon: CalendarIcon },
+    { href: "/tracker", label: t.sidebar.tracker, icon: RadarIcon },
+    { href: "/messenger", label: t.sidebar.messenger, icon: ChatIcon },
+    { href: "/billing", label: t.sidebar.billing, icon: WalletIcon },
     { href: "/reports", label: t.sidebar.reports, icon: ChartBarIcon },
   ];
 
@@ -216,6 +224,10 @@ export default function Topbar() {
     { match: (p) => p.startsWith("/shipments/"), crumb: t.topbar.crumbRoute },
     { match: (p) => p.startsWith("/drivers"), crumb: t.topbar.crumbDrivers },
     { match: (p) => p.startsWith("/fleet"), crumb: t.topbar.crumbFleet },
+    { match: (p) => p.startsWith("/scheduled"), crumb: t.topbar.crumbScheduled },
+    { match: (p) => p.startsWith("/tracker"), crumb: t.topbar.crumbTracker },
+    { match: (p) => p.startsWith("/messenger"), crumb: t.topbar.crumbMessenger },
+    { match: (p) => p.startsWith("/billing"), crumb: t.topbar.crumbBilling },
     { match: (p) => p.startsWith("/reports"), crumb: t.topbar.crumbReports },
   ];
   const section = titles.find((item) => item.match(pathname)) ?? titles[0];
@@ -348,9 +360,7 @@ export default function Topbar() {
                           className="flex w-full items-center justify-between gap-3 px-3 py-2 text-left text-sm data-[active=true]:bg-bg-hover hover:bg-bg-hover"
                         >
                           <span className="flex min-w-0 items-center gap-2.5">
-                            <span className="relative block size-6 shrink-0 overflow-hidden rounded-full">
-                              <Image src={d.avatar} alt={d.name} fill sizes="24px" className="object-cover" />
-                            </span>
+                            <Avatar src={d.avatar} name={d.name} sizePx={24} className="size-6" />
                             <span className="truncate text-text">{d.name}</span>
                           </span>
                           <DriverStatusBadge status={d.status} />

@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
+import Avatar from "@/components/shared/Avatar";
 import { ChevronRightIcon, PhoneIcon, TruckIcon } from "@/components/shared/icons";
 import { DriverStatusBadge } from "@/components/shared/StatusBadge";
 import { useLang } from "@/i18n/LangContext";
@@ -27,12 +28,13 @@ export default function DriverCard({
   return (
     <div className="panel group rounded-2xl border border-border p-4 transition-colors duration-150 hover:border-text-muted/40">
       <Link href={`/drivers/${driver.id}`} className="flex items-start gap-3">
-        <span
-          className="relative block size-14 shrink-0 overflow-hidden rounded-full ring-2 ring-offset-2 ring-offset-bg-panel"
-          style={{ ["--tw-ring-color" as string]: ring }}
-        >
-          <Image src={driver.avatar} alt={driver.name} fill sizes="56px" className="object-cover" />
-        </span>
+        <Avatar
+          src={driver.avatar}
+          name={driver.name}
+          sizePx={56}
+          className="size-14 ring-2 ring-offset-2 ring-offset-bg-panel"
+          style={{ ["--tw-ring-color" as string]: ring } as CSSProperties}
+        />
         <div className="min-w-0 flex-1 pt-0.5">
           <p className="flex items-center gap-1 text-sm leading-snug font-medium text-text group-hover:text-accent">
             {driver.name}

@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { ChevronRightIcon, PhoneIcon, TruckIcon } from "@/components/shared/icons";
+import type { CSSProperties } from "react";
+import Avatar from "@/components/shared/Avatar";
+import { ChatIcon, ChevronRightIcon, PhoneIcon, TruckIcon } from "@/components/shared/icons";
 import { DriverStatusBadge, ShipmentStatusBadge } from "@/components/shared/StatusBadge";
 import { useLang } from "@/i18n/LangContext";
 import type { Driver, Shipment, Vehicle } from "@/lib/types";
@@ -36,12 +37,13 @@ export default function DriverDetail({
 
       <div className="panel mb-6 flex flex-col gap-5 rounded-2xl border border-border p-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
-          <span
-            className="relative block size-16 shrink-0 overflow-hidden rounded-full ring-2 ring-offset-2 ring-offset-bg-panel"
-            style={{ ["--tw-ring-color" as string]: ring }}
-          >
-            <Image src={driver.avatar} alt={driver.name} fill sizes="64px" className="object-cover" />
-          </span>
+          <Avatar
+            src={driver.avatar}
+            name={driver.name}
+            sizePx={64}
+            className="size-16 ring-2 ring-offset-2 ring-offset-bg-panel"
+            style={{ ["--tw-ring-color" as string]: ring } as CSSProperties}
+          />
           <div>
             <h1 className="text-xl font-semibold tracking-tight text-text">{driver.name}</h1>
             <p className="mt-1 flex items-center gap-1.5 text-sm text-text-muted">
@@ -53,13 +55,22 @@ export default function DriverDetail({
             </span>
           </div>
         </div>
-        <a
-          href={`tel:${driver.phone.replace(/\s/g, "")}`}
-          className="pressable flex items-center justify-center gap-2 rounded-lg border border-border-soft bg-bg-elevated px-4 py-2.5 text-sm text-text-soft hover:border-accent/30 hover:text-accent"
-        >
-          <PhoneIcon className="size-4" />
-          {driver.phone}
-        </a>
+        <div className="flex shrink-0 items-center gap-2">
+          <Link
+            href={`/messenger?driver=${driver.id}`}
+            className="pressable flex items-center justify-center gap-2 rounded-lg border border-border-soft bg-bg-elevated px-4 py-2.5 text-sm text-text-soft hover:border-accent/30 hover:text-accent"
+          >
+            <ChatIcon className="size-4" />
+            {t.driversPage.messageDriver}
+          </Link>
+          <a
+            href={`tel:${driver.phone.replace(/\s/g, "")}`}
+            className="pressable flex items-center justify-center gap-2 rounded-lg border border-border-soft bg-bg-elevated px-4 py-2.5 text-sm text-text-soft hover:border-accent/30 hover:text-accent"
+          >
+            <PhoneIcon className="size-4" />
+            {driver.phone}
+          </a>
+        </div>
       </div>
 
       <div className="mb-6 grid grid-cols-3 gap-3">

@@ -32,12 +32,25 @@ export const VEHICLE_STATUS_LABELS: Record<VehicleStatus, Record<Lang, string>> 
 };
 
 export interface Dictionary {
+  common: {
+    readOnlyNotice: string;
+    cancel: string;
+    add: string;
+    close: string;
+    requiredField: string;
+  };
   sidebar: {
     dispatch: string;
     overview: string;
+    operations: string;
+    finance: string;
     dashboard: string;
     drivers: string;
     fleet: string;
+    scheduled: string;
+    tracker: string;
+    messenger: string;
+    billing: string;
     reports: string;
     dispatcherName: string;
     dispatcherRole: string;
@@ -45,6 +58,21 @@ export interface Dictionary {
     dispatcherAvatarAlt: string;
     demoNotice: string;
     closeMenu: string;
+    logout: string;
+  };
+  loginPage: {
+    tagline: string;
+    blurb: string;
+    heading: string;
+    subheading: string;
+    loginLabel: string;
+    passwordLabel: string;
+    showPassword: string;
+    hidePassword: string;
+    submit: string;
+    loggingIn: string;
+    genericError: string;
+    demoNote: string;
   };
   topbar: {
     searchPlaceholder: string;
@@ -66,6 +94,10 @@ export interface Dictionary {
     crumbDrivers: string;
     crumbFleet: string;
     crumbReports: string;
+    crumbScheduled: string;
+    crumbTracker: string;
+    crumbMessenger: string;
+    crumbBilling: string;
   };
   dashboardPage: {
     title: string;
@@ -74,6 +106,15 @@ export interface Dictionary {
     emptyFiltered: string;
     emptySearch: (query: string) => string;
     liveLabel: string;
+    financeTitle: string;
+    monthRevenue: string;
+    revenueUp: (percent: number) => string;
+    revenueDown: (percent: number) => string;
+    avgShipmentValue: string;
+    fleetUtilization: string;
+    revenueChartTitle: string;
+    revenueChartSubtitle: string;
+    currencyUnit: string;
   };
   kpi: {
     active: string;
@@ -135,6 +176,15 @@ export interface Dictionary {
     historyTitle: string;
     historyEmpty: string;
     vehicleSection: string;
+    messageDriver: string;
+    addDriver: string;
+    addDriverTitle: string;
+    formName: string;
+    formPhone: string;
+    formVehicle: string;
+    formPlate: string;
+    formYears: string;
+    submitDriver: string;
   };
   timeline: {
     loading: string;
@@ -160,6 +210,76 @@ export interface Dictionary {
     truckType: string;
     vanType: string;
     backToFleet: string;
+    addVehicle: string;
+    addVehicleTitle: string;
+    formModel: string;
+    formPlate: string;
+    formType: string;
+    formCapacity: string;
+    submitVehicle: string;
+  };
+  scheduledPage: {
+    title: string;
+    subtitle: string;
+    loadError: string;
+    addTrip: string;
+    addTripTitle: string;
+    unassignedLabel: string;
+    assignedLabel: string;
+    assignAction: string;
+    assignModalTitle: string;
+    chooseDriver: string;
+    chooseVehicle: string;
+    confirmAssign: string;
+    tableRoute: string;
+    tableCargo: string;
+    tableDate: string;
+    tableStatus: string;
+    tableDriver: string;
+    formOrigin: string;
+    formDestination: string;
+    formCargo: string;
+    formDistance: string;
+    formDate: string;
+    submitTrip: string;
+    noAvailableDrivers: string;
+  };
+  trackerPage: {
+    title: string;
+    subtitle: string;
+    loadError: string;
+    activeCount: (n: number) => string;
+    noActive: string;
+    legendNote: string;
+  };
+  messengerPage: {
+    title: string;
+    subtitle: string;
+    loadError: string;
+    selectDriver: string;
+    inputPlaceholder: string;
+    send: string;
+    emptyThread: string;
+    conversationsTitle: string;
+  };
+  billingPage: {
+    title: string;
+    subtitle: string;
+    loadError: string;
+    totalRevenue: string;
+    paidAmount: string;
+    pendingAmount: string;
+    overdueAmount: string;
+    tableClient: string;
+    tableShipment: string;
+    tableAmount: string;
+    tableStatus: string;
+    tableDate: string;
+    statusPaid: string;
+    statusPending: string;
+    statusOverdue: string;
+    markPaid: string;
+    markingPaid: string;
   };
   reportsPage: {
     title: string;
@@ -182,23 +302,55 @@ export interface Dictionary {
     shipmentNotFound: string;
     vehicleNotFound: string;
     vehicleInService: string;
+    invalidCredentials: string;
+    readOnlyDemo: string;
+    scheduledTripNotFound: string;
+    driverNotFound: string;
   };
 }
 
 const uk: Dictionary = {
+  common: {
+    readOnlyNotice: "Це демо-акаунт лише для перегляду. У робочому кабінеті ця дія збереже зміни.",
+    cancel: "Скасувати",
+    add: "Додати",
+    close: "Закрити",
+    requiredField: "Заповніть це поле",
+  },
   sidebar: {
     dispatch: "Atlas Ops",
     overview: "Огляд",
+    operations: "Операції",
+    finance: "Фінанси",
     dashboard: "Дашборд",
     drivers: "Водії",
     fleet: "Автопарк",
+    scheduled: "Заплановані поїздки",
+    tracker: "Трекер на карті",
+    messenger: "Месенджер",
+    billing: "Оплата",
     reports: "Звіти",
     dispatcherName: "Максим Бойко",
     dispatcherRole: "Диспетчерська",
     online: "Диспетчер · онлайн",
     dispatcherAvatarAlt: "Диспетчер",
-    demoNotice: "Демо-проєкт для портфоліо NexuraDev",
+    demoNotice: "Демо-режим · лише перегляд, дані відкриті для прикладу",
     closeMenu: "Закрити меню",
+    logout: "Вийти",
+  },
+  loginPage: {
+    tagline: "Диспетчерська панель",
+    blurb: "Відправлення, водії, автопарк і фінанси логістичної компанії в одному місці.",
+    heading: "Вхід у систему",
+    subheading: "Це відкритий демо-акаунт, дані для входу вже підставлені",
+    loginLabel: "Логін",
+    passwordLabel: "Пароль",
+    showPassword: "Показати пароль",
+    hidePassword: "Приховати пароль",
+    submit: "Увійти",
+    loggingIn: "Заходимо…",
+    genericError: "Не вдалося увійти. Спробуйте ще раз.",
+    demoNote: "Демо-доступ для перегляду портфоліо NexuraDev. Додавати чи змінювати дані не можна, але весь функціонал відкритий.",
   },
   topbar: {
     searchPlaceholder: "Пошук за кодом, маршрутом або водієм…",
@@ -223,6 +375,10 @@ const uk: Dictionary = {
     crumbDrivers: "Водії",
     crumbFleet: "Автопарк",
     crumbReports: "Звіти",
+    crumbScheduled: "Заплановані поїздки",
+    crumbTracker: "Трекер на карті",
+    crumbMessenger: "Месенджер",
+    crumbBilling: "Оплата",
   },
   dashboardPage: {
     title: "Дашборд відправлень",
@@ -231,6 +387,15 @@ const uk: Dictionary = {
     emptyFiltered: "Немає відправлень з обраним статусом.",
     emptySearch: (query) => `Нічого не знайдено за запитом «${query}».`,
     liveLabel: "Оновлюється автоматично",
+    financeTitle: "Фінанси та автопарк",
+    monthRevenue: "Дохід за 30 днів",
+    revenueUp: (percent) => `+${percent}% до попередніх 30 днів`,
+    revenueDown: (percent) => `-${percent}% до попередніх 30 днів`,
+    avgShipmentValue: "Середній чек",
+    fleetUtilization: "Завантаженість автопарку",
+    revenueChartTitle: "Дохід за останні 30 днів",
+    revenueChartSubtitle: "Сума по даті виставлення рахунку",
+    currencyUnit: "грн",
   },
   kpi: {
     active: "Активні відправлення",
@@ -292,6 +457,15 @@ const uk: Dictionary = {
     historyTitle: "Історія рейсів",
     historyEmpty: "Рейсів за цим водієм поки немає.",
     vehicleSection: "Закріплений транспорт",
+    messageDriver: "Написати",
+    addDriver: "Додати водія",
+    addDriverTitle: "Новий водій",
+    formName: "Ім'я та прізвище",
+    formPhone: "Телефон",
+    formVehicle: "Модель авто",
+    formPlate: "Держ. номер",
+    formYears: "Стаж, років",
+    submitDriver: "Додати водія",
   },
   timeline: {
     loading: "Завантаження",
@@ -317,6 +491,76 @@ const uk: Dictionary = {
     truckType: "Вантажівка",
     vanType: "Фургон",
     backToFleet: "Автопарк",
+    addVehicle: "Додати авто",
+    addVehicleTitle: "Новий транспортний засіб",
+    formModel: "Модель",
+    formPlate: "Держ. номер",
+    formType: "Тип",
+    formCapacity: "Вантажопідйомність, кг",
+    submitVehicle: "Додати авто",
+  },
+  scheduledPage: {
+    title: "Заплановані поїздки",
+    subtitle: "Майбутні рейси, які ще потребують водія та транспорту.",
+    loadError: "Не вдалося завантажити заплановані поїздки.",
+    addTrip: "Запланувати поїздку",
+    addTripTitle: "Нова запланована поїздка",
+    unassignedLabel: "Без водія",
+    assignedLabel: "Призначено",
+    assignAction: "Призначити водія",
+    assignModalTitle: "Призначення на рейс",
+    chooseDriver: "Водій",
+    chooseVehicle: "Транспорт",
+    confirmAssign: "Призначити",
+    tableRoute: "Маршрут",
+    tableCargo: "Вантаж",
+    tableDate: "Дата",
+    tableStatus: "Статус",
+    tableDriver: "Водій",
+    formOrigin: "Звідки",
+    formDestination: "Куди",
+    formCargo: "Вантаж",
+    formDistance: "Відстань, км",
+    formDate: "Дата й час відправлення",
+    submitTrip: "Запланувати",
+    noAvailableDrivers: "Немає вільних водіїв або транспорту",
+  },
+  trackerPage: {
+    title: "Трекер на карті",
+    subtitle: "Поточне положення всіх вантажівок у дорозі на одній схемі.",
+    loadError: "Не вдалося завантажити трекер.",
+    activeCount: (n) => `${n} у дорозі`,
+    noActive: "Зараз жодне відправлення не в дорозі.",
+    legendNote: "Схема мережі · не в масштабі, натисніть на мітку для деталей",
+  },
+  messengerPage: {
+    title: "Месенджер з водіями",
+    subtitle: "Переписка диспетчера з водіями по поточних рейсах.",
+    loadError: "Не вдалося завантажити повідомлення.",
+    selectDriver: "Оберіть водія зі списку зліва",
+    inputPlaceholder: "Напишіть повідомлення…",
+    send: "Надіслати",
+    emptyThread: "Повідомлень поки немає.",
+    conversationsTitle: "Водії",
+  },
+  billingPage: {
+    title: "Оплата",
+    subtitle: "Рахунки клієнтів за відправлення та статус оплати.",
+    loadError: "Не вдалося завантажити рахунки.",
+    totalRevenue: "Загальний дохід",
+    paidAmount: "Оплачено",
+    pendingAmount: "Очікує оплати",
+    overdueAmount: "Прострочено",
+    tableClient: "Клієнт",
+    tableShipment: "Відправлення",
+    tableAmount: "Сума",
+    tableStatus: "Статус",
+    tableDate: "Дата",
+    statusPaid: "Оплачено",
+    statusPending: "Очікує",
+    statusOverdue: "Прострочено",
+    markPaid: "Позначити оплаченим",
+    markingPaid: "Зберігаємо…",
   },
   reportsPage: {
     title: "Звіти",
@@ -339,23 +583,55 @@ const uk: Dictionary = {
     shipmentNotFound: "Відправлення не знайдено.",
     vehicleNotFound: "Транспортний засіб не знайдено.",
     vehicleInService: "Транспортний засіб зараз на рейсі.",
+    invalidCredentials: "Невірний логін або пароль.",
+    readOnlyDemo: "Це демо-акаунт лише для перегляду. Зміни не зберігаються.",
+    scheduledTripNotFound: "Заплановану поїздку не знайдено.",
+    driverNotFound: "Водія не знайдено.",
   },
 };
 
 const en: Dictionary = {
+  common: {
+    readOnlyNotice: "This demo account is view-only. In a live workspace this action would save.",
+    cancel: "Cancel",
+    add: "Add",
+    close: "Close",
+    requiredField: "Fill in this field",
+  },
   sidebar: {
     dispatch: "Atlas Ops",
     overview: "Overview",
+    operations: "Operations",
+    finance: "Finance",
     dashboard: "Dashboard",
     drivers: "Drivers",
     fleet: "Fleet",
+    scheduled: "Scheduled trips",
+    tracker: "Map tracker",
+    messenger: "Messenger",
+    billing: "Billing",
     reports: "Reports",
     dispatcherName: "Maksym Boiko",
     dispatcherRole: "Dispatch",
     online: "Dispatcher · online",
     dispatcherAvatarAlt: "Dispatcher",
-    demoNotice: "Portfolio demo project for NexuraDev",
+    demoNotice: "Demo mode · view only, sample data",
     closeMenu: "Close menu",
+    logout: "Log out",
+  },
+  loginPage: {
+    tagline: "Dispatch console",
+    blurb: "Shipments, drivers, fleet, and finances for a logistics company in one place.",
+    heading: "Sign in",
+    subheading: "This is an open demo account, the credentials are already filled in",
+    loginLabel: "Login",
+    passwordLabel: "Password",
+    showPassword: "Show password",
+    hidePassword: "Hide password",
+    submit: "Sign in",
+    loggingIn: "Signing in…",
+    genericError: "Couldn't sign in. Please try again.",
+    demoNote: "Demo access for browsing the NexuraDev portfolio. You can't add or change data, but every feature is unlocked.",
   },
   topbar: {
     searchPlaceholder: "Search by code, route, or driver…",
@@ -378,6 +654,10 @@ const en: Dictionary = {
     crumbDrivers: "Drivers",
     crumbFleet: "Fleet",
     crumbReports: "Reports",
+    crumbScheduled: "Scheduled trips",
+    crumbTracker: "Map tracker",
+    crumbMessenger: "Messenger",
+    crumbBilling: "Billing",
   },
   dashboardPage: {
     title: "Shipments dashboard",
@@ -386,6 +666,15 @@ const en: Dictionary = {
     emptyFiltered: "No shipments with the selected status.",
     emptySearch: (query) => `No matches for "${query}".`,
     liveLabel: "Updating automatically",
+    financeTitle: "Finance & fleet",
+    monthRevenue: "Revenue, last 30 days",
+    revenueUp: (percent) => `+${percent}% vs the previous 30 days`,
+    revenueDown: (percent) => `-${percent}% vs the previous 30 days`,
+    avgShipmentValue: "Average shipment value",
+    fleetUtilization: "Fleet utilization",
+    revenueChartTitle: "Revenue, last 30 days",
+    revenueChartSubtitle: "Sum by invoice date",
+    currencyUnit: "UAH",
   },
   kpi: {
     active: "Active shipments",
@@ -447,6 +736,15 @@ const en: Dictionary = {
     historyTitle: "Route history",
     historyEmpty: "No routes recorded for this driver yet.",
     vehicleSection: "Assigned vehicle",
+    messageDriver: "Message",
+    addDriver: "Add driver",
+    addDriverTitle: "New driver",
+    formName: "Full name",
+    formPhone: "Phone",
+    formVehicle: "Vehicle model",
+    formPlate: "Plate",
+    formYears: "Years of experience",
+    submitDriver: "Add driver",
   },
   timeline: {
     loading: "Loading",
@@ -472,6 +770,76 @@ const en: Dictionary = {
     truckType: "Truck",
     vanType: "Van",
     backToFleet: "Fleet",
+    addVehicle: "Add vehicle",
+    addVehicleTitle: "New vehicle",
+    formModel: "Model",
+    formPlate: "Plate",
+    formType: "Type",
+    formCapacity: "Capacity, kg",
+    submitVehicle: "Add vehicle",
+  },
+  scheduledPage: {
+    title: "Scheduled trips",
+    subtitle: "Upcoming trips that still need a driver and a vehicle assigned.",
+    loadError: "Failed to load scheduled trips.",
+    addTrip: "Schedule a trip",
+    addTripTitle: "New scheduled trip",
+    unassignedLabel: "Unassigned",
+    assignedLabel: "Assigned",
+    assignAction: "Assign a driver",
+    assignModalTitle: "Assign this trip",
+    chooseDriver: "Driver",
+    chooseVehicle: "Vehicle",
+    confirmAssign: "Assign",
+    tableRoute: "Route",
+    tableCargo: "Cargo",
+    tableDate: "Date",
+    tableStatus: "Status",
+    tableDriver: "Driver",
+    formOrigin: "From",
+    formDestination: "To",
+    formCargo: "Cargo",
+    formDistance: "Distance, km",
+    formDate: "Departure date & time",
+    submitTrip: "Schedule",
+    noAvailableDrivers: "No available drivers or vehicles",
+  },
+  trackerPage: {
+    title: "Map tracker",
+    subtitle: "Every truck currently en route, shown on one shared schematic.",
+    loadError: "Failed to load the tracker.",
+    activeCount: (n) => `${n} en route`,
+    noActive: "No shipment is en route right now.",
+    legendNote: "Network schematic · not to scale, click a marker for details",
+  },
+  messengerPage: {
+    title: "Driver messenger",
+    subtitle: "The dispatcher's conversations with drivers about their current routes.",
+    loadError: "Failed to load messages.",
+    selectDriver: "Pick a driver from the list on the left",
+    inputPlaceholder: "Write a message…",
+    send: "Send",
+    emptyThread: "No messages yet.",
+    conversationsTitle: "Drivers",
+  },
+  billingPage: {
+    title: "Billing",
+    subtitle: "Client invoices for shipments and their payment status.",
+    loadError: "Failed to load invoices.",
+    totalRevenue: "Total revenue",
+    paidAmount: "Paid",
+    pendingAmount: "Pending",
+    overdueAmount: "Overdue",
+    tableClient: "Client",
+    tableShipment: "Shipment",
+    tableAmount: "Amount",
+    tableStatus: "Status",
+    tableDate: "Date",
+    statusPaid: "Paid",
+    statusPending: "Pending",
+    statusOverdue: "Overdue",
+    markPaid: "Mark as paid",
+    markingPaid: "Saving…",
   },
   reportsPage: {
     title: "Reports",
@@ -494,23 +862,55 @@ const en: Dictionary = {
     shipmentNotFound: "Shipment not found.",
     vehicleNotFound: "Vehicle not found.",
     vehicleInService: "This vehicle is currently in service.",
+    invalidCredentials: "Incorrect login or password.",
+    readOnlyDemo: "This demo account is view-only. Changes aren't saved.",
+    scheduledTripNotFound: "Scheduled trip not found.",
+    driverNotFound: "Driver not found.",
   },
 };
 
 const ru: Dictionary = {
+  common: {
+    readOnlyNotice: "Это демо-аккаунт только для просмотра. В рабочем кабинете это действие сохранит изменения.",
+    cancel: "Отменить",
+    add: "Добавить",
+    close: "Закрыть",
+    requiredField: "Заполните это поле",
+  },
   sidebar: {
     dispatch: "Atlas Ops",
     overview: "Обзор",
+    operations: "Операции",
+    finance: "Финансы",
     dashboard: "Дашборд",
     drivers: "Водители",
     fleet: "Автопарк",
+    scheduled: "Запланированные поездки",
+    tracker: "Трекер на карте",
+    messenger: "Мессенджер",
+    billing: "Оплата",
     reports: "Отчёты",
     dispatcherName: "Максим Бойко",
     dispatcherRole: "Диспетчерская",
     online: "Диспетчер · онлайн",
     dispatcherAvatarAlt: "Диспетчер",
-    demoNotice: "Демо-проект для портфолио NexuraDev",
+    demoNotice: "Демо-режим · только просмотр, данные открыты для примера",
     closeMenu: "Закрыть меню",
+    logout: "Выйти",
+  },
+  loginPage: {
+    tagline: "Диспетчерская панель",
+    blurb: "Отправления, водители, автопарк и финансы логистической компании в одном месте.",
+    heading: "Вход в систему",
+    subheading: "Это открытый демо-аккаунт, данные для входа уже подставлены",
+    loginLabel: "Логин",
+    passwordLabel: "Пароль",
+    showPassword: "Показать пароль",
+    hidePassword: "Скрыть пароль",
+    submit: "Войти",
+    loggingIn: "Заходим…",
+    genericError: "Не удалось войти. Попробуйте ещё раз.",
+    demoNote: "Демо-доступ для просмотра портфолио NexuraDev. Добавлять или менять данные нельзя, но весь функционал открыт.",
   },
   topbar: {
     searchPlaceholder: "Поиск по коду, маршруту или водителю…",
@@ -535,6 +935,10 @@ const ru: Dictionary = {
     crumbDrivers: "Водители",
     crumbFleet: "Автопарк",
     crumbReports: "Отчёты",
+    crumbScheduled: "Запланированные поездки",
+    crumbTracker: "Трекер на карте",
+    crumbMessenger: "Мессенджер",
+    crumbBilling: "Оплата",
   },
   dashboardPage: {
     title: "Дашборд отправлений",
@@ -543,6 +947,15 @@ const ru: Dictionary = {
     emptyFiltered: "Нет отправлений с выбранным статусом.",
     emptySearch: (query) => `Ничего не найдено по запросу «${query}».`,
     liveLabel: "Обновляется автоматически",
+    financeTitle: "Финансы и автопарк",
+    monthRevenue: "Доход за 30 дней",
+    revenueUp: (percent) => `+${percent}% к предыдущим 30 дням`,
+    revenueDown: (percent) => `-${percent}% к предыдущим 30 дням`,
+    avgShipmentValue: "Средний чек",
+    fleetUtilization: "Загрузка автопарка",
+    revenueChartTitle: "Доход за последние 30 дней",
+    revenueChartSubtitle: "Сумма по дате выставления счёта",
+    currencyUnit: "грн",
   },
   kpi: {
     active: "Активные отправления",
@@ -604,6 +1017,15 @@ const ru: Dictionary = {
     historyTitle: "История рейсов",
     historyEmpty: "Рейсов за этим водителем пока нет.",
     vehicleSection: "Закреплённый транспорт",
+    messageDriver: "Написать",
+    addDriver: "Добавить водителя",
+    addDriverTitle: "Новый водитель",
+    formName: "Имя и фамилия",
+    formPhone: "Телефон",
+    formVehicle: "Модель авто",
+    formPlate: "Гос. номер",
+    formYears: "Стаж, лет",
+    submitDriver: "Добавить водителя",
   },
   timeline: {
     loading: "Погрузка",
@@ -629,6 +1051,76 @@ const ru: Dictionary = {
     truckType: "Грузовик",
     vanType: "Фургон",
     backToFleet: "Автопарк",
+    addVehicle: "Добавить авто",
+    addVehicleTitle: "Новое транспортное средство",
+    formModel: "Модель",
+    formPlate: "Гос. номер",
+    formType: "Тип",
+    formCapacity: "Грузоподъёмность, кг",
+    submitVehicle: "Добавить авто",
+  },
+  scheduledPage: {
+    title: "Запланированные поездки",
+    subtitle: "Будущие рейсы, которым ещё нужен водитель и транспорт.",
+    loadError: "Не удалось загрузить запланированные поездки.",
+    addTrip: "Запланировать поездку",
+    addTripTitle: "Новая запланированная поездка",
+    unassignedLabel: "Без водителя",
+    assignedLabel: "Назначено",
+    assignAction: "Назначить водителя",
+    assignModalTitle: "Назначение на рейс",
+    chooseDriver: "Водитель",
+    chooseVehicle: "Транспорт",
+    confirmAssign: "Назначить",
+    tableRoute: "Маршрут",
+    tableCargo: "Груз",
+    tableDate: "Дата",
+    tableStatus: "Статус",
+    tableDriver: "Водитель",
+    formOrigin: "Откуда",
+    formDestination: "Куда",
+    formCargo: "Груз",
+    formDistance: "Расстояние, км",
+    formDate: "Дата и время отправления",
+    submitTrip: "Запланировать",
+    noAvailableDrivers: "Нет свободных водителей или транспорта",
+  },
+  trackerPage: {
+    title: "Трекер на карте",
+    subtitle: "Текущее положение всех грузовиков в пути на одной схеме.",
+    loadError: "Не удалось загрузить трекер.",
+    activeCount: (n) => `${n} в пути`,
+    noActive: "Сейчас ни одно отправление не в пути.",
+    legendNote: "Схема сети · не в масштабе, нажмите на метку для деталей",
+  },
+  messengerPage: {
+    title: "Мессенджер с водителями",
+    subtitle: "Переписка диспетчера с водителями по текущим рейсам.",
+    loadError: "Не удалось загрузить сообщения.",
+    selectDriver: "Выберите водителя из списка слева",
+    inputPlaceholder: "Напишите сообщение…",
+    send: "Отправить",
+    emptyThread: "Сообщений пока нет.",
+    conversationsTitle: "Водители",
+  },
+  billingPage: {
+    title: "Оплата",
+    subtitle: "Счета клиентов за отправления и статус оплаты.",
+    loadError: "Не удалось загрузить счета.",
+    totalRevenue: "Общий доход",
+    paidAmount: "Оплачено",
+    pendingAmount: "Ожидает оплаты",
+    overdueAmount: "Просрочено",
+    tableClient: "Клиент",
+    tableShipment: "Отправление",
+    tableAmount: "Сумма",
+    tableStatus: "Статус",
+    tableDate: "Дата",
+    statusPaid: "Оплачено",
+    statusPending: "Ожидает",
+    statusOverdue: "Просрочено",
+    markPaid: "Отметить оплаченным",
+    markingPaid: "Сохраняем…",
   },
   reportsPage: {
     title: "Отчёты",
@@ -651,6 +1143,10 @@ const ru: Dictionary = {
     shipmentNotFound: "Отправление не найдено.",
     vehicleNotFound: "Транспортное средство не найдено.",
     vehicleInService: "Транспортное средство сейчас на рейсе.",
+    invalidCredentials: "Неверный логин или пароль.",
+    readOnlyDemo: "Это демо-аккаунт только для просмотра. Изменения не сохраняются.",
+    scheduledTripNotFound: "Запланированная поездка не найдена.",
+    driverNotFound: "Водитель не найден.",
   },
 };
 

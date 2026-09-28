@@ -1,10 +1,10 @@
-import { drivers } from "@/data/drivers";
+import { getDriver, getDrivers } from "@/lib/store";
 import type { Driver } from "@/lib/types";
 
 export function getAllDrivers(): Driver[] {
-  return drivers;
+  return getDrivers();
 }
 
 export function getDriverById(id: string): Driver | undefined {
-  return drivers.find((d) => d.id === id);
+  return getDriver(id);
 }

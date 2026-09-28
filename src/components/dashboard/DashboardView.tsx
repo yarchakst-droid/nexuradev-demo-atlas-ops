@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import FinanceSection from "@/components/dashboard/FinanceSection";
 import KpiStrip from "@/components/dashboard/KpiStrip";
 import ShipmentsTable from "@/components/dashboard/ShipmentsTable";
 import StatusFilterTabs from "@/components/dashboard/StatusFilterTabs";
@@ -106,6 +107,7 @@ export default function DashboardView() {
         {t.dashboardPage.liveLabel}
       </div>
       <KpiStrip stats={stats} previousStats={previousStats} />
+      <FinanceSection />
       <div className="flex flex-col gap-4">
         <StatusFilterTabs active={filter} onChange={setFilter} counts={counts} />
         <ShipmentsTable
