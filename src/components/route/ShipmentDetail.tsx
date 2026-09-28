@@ -43,7 +43,7 @@ export default function ShipmentDetail({
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-8 py-8">
+    <div className="mx-auto max-w-6xl px-4 py-6 sm:px-8 sm:py-8">
       <Link href="/" className="mb-4 inline-flex items-center gap-1.5 text-sm text-text-soft hover:text-text">
         {t.routeDetail.backToDashboard}
       </Link>

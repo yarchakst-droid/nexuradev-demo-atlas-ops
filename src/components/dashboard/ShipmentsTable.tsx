@@ -45,7 +45,8 @@ export default function ShipmentsTable({
 
   return (
     <div className="panel overflow-hidden rounded-xl border border-border">
-      <table className="w-full border-collapse text-sm">
+      <div className="overflow-x-auto">
+      <table className="w-full min-w-[640px] border-collapse text-sm">
         <thead>
           <tr className="border-b border-border bg-bg-elevated/60 text-left text-[11px] uppercase tracking-wider text-text-muted">
             <th className="px-4 py-3 font-medium">{t.table.code}</th>
@@ -110,7 +111,7 @@ export default function ShipmentsTable({
                 <td className="px-4 py-3 text-right">
                   <Link
                     href={`/shipments/${s.id}`}
-                    className="inline-flex text-text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-text"
+                    className="inline-flex -m-2 items-center justify-center p-2 text-text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-text"
                   >
                     <ChevronRightIcon className="size-4" />
                   </Link>
@@ -120,6 +121,7 @@ export default function ShipmentsTable({
           })}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }

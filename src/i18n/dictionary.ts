@@ -44,9 +44,11 @@ export interface Dictionary {
     online: string;
     dispatcherAvatarAlt: string;
     demoNotice: string;
+    closeMenu: string;
   };
   topbar: {
     searchPlaceholder: string;
+    openMenuAria: string;
     notificationsAria: string;
     notificationsTitle: string;
     notifications: string[];
@@ -180,9 +182,11 @@ const uk: Dictionary = {
     online: "Диспетчер · онлайн",
     dispatcherAvatarAlt: "Диспетчер",
     demoNotice: "Демо-проєкт для портфоліо NexuraDev",
+    closeMenu: "Закрити меню",
   },
   topbar: {
     searchPlaceholder: "Пошук за кодом, маршрутом або водієм…",
+    openMenuAria: "Відкрити меню",
     notificationsAria: "Сповіщення",
     notificationsTitle: "Сповіщення",
     notifications: [
@@ -320,9 +324,11 @@ const en: Dictionary = {
     online: "Dispatcher · online",
     dispatcherAvatarAlt: "Dispatcher",
     demoNotice: "Portfolio demo project for NexuraDev",
+    closeMenu: "Close menu",
   },
   topbar: {
     searchPlaceholder: "Search by code, route, or driver…",
+    openMenuAria: "Open menu",
     notificationsAria: "Notifications",
     notificationsTitle: "Notifications",
     notifications: [
@@ -460,9 +466,11 @@ const ru: Dictionary = {
     online: "Диспетчер · онлайн",
     dispatcherAvatarAlt: "Диспетчер",
     demoNotice: "Демо-проект для портфолио NexuraDev",
+    closeMenu: "Закрыть меню",
   },
   topbar: {
     searchPlaceholder: "Поиск по коду, маршруту или водителю…",
+    openMenuAria: "Открыть меню",
     notificationsAria: "Уведомления",
     notificationsTitle: "Уведомления",
     notifications: [

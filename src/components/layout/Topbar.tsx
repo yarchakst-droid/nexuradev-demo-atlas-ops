@@ -3,9 +3,10 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
-import { BellIcon, SearchIcon } from "@/components/shared/icons";
+import { BellIcon, MenuIcon, SearchIcon } from "@/components/shared/icons";
 import { useLang } from "@/i18n/LangContext";
 import { useSearch } from "@/lib/search-context";
+import { useSidebar } from "@/lib/sidebar-context";
 
 let cachedNow = Date.now();
 
@@ -36,6 +37,7 @@ export default function Topbar() {
   const now = useClock();
   const { t, locale } = useLang();
   const { query, setQuery } = useSearch();
+  const { open: openSidebar } = useSidebar();
   const searchRef = useRef<HTMLInputElement>(null);
   const [notifOpen, setNotifOpen] = useState(false);
   const [unread, setUnread] = useState(true);
@@ -75,14 +77,27 @@ export default function Topbar() {
   const section = titles.find((item) => item.match(pathname)) ?? titles[0];
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center gap-4 border-b border-border bg-bg/85 px-8 backdrop-blur-md">
-      <div className="flex min-w-0 items-center gap-1.5 text-sm">
+    <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center gap-3 border-b border-border bg-bg/85 px-4 backdrop-blur-md lg:gap-4 lg:px-8">
+      <button
+        type="button"
+        onClick={openSidebar}
+        aria-label={t.topbar.openMenuAria}
+        className="-ml-1 flex size-8 shrink-0 items-center justify-center rounded-md text-text-soft transition-colors hover:bg-bg-elevated hover:text-text lg:hidden"
+      >
+        <MenuIcon className="size-4.5" />
+      </button>
+
+      <div className="hidden min-w-0 items-center gap-1.5 text-sm lg:flex">
         <span className="text-text-muted">Atlas Ops</span>
         <span className="text-text-muted">/</span>
         <span className="font-medium text-text">{section.crumb}</span>
       </div>
 
-      <div className="mx-auto flex max-w-md flex-1 items-center gap-2 rounded-md border border-border-soft bg-bg-panel px-3 py-1.5 text-xs text-text-muted focus-within:border-accent/40">
+      <div className="flex min-w-0 flex-1 items-center gap-1.5 text-sm lg:hidden">
+        <span className="truncate font-medium text-text">{section.crumb}</span>
+      </div>
+
+      <div className="mx-auto hidden max-w-md flex-1 items-center gap-2 rounded-md border border-border-soft bg-bg-panel px-3 py-1.5 text-xs text-text-muted focus-within:border-accent/40 lg:flex">
         <SearchIcon className="size-3.5 shrink-0" />
         <input
           ref={searchRef}

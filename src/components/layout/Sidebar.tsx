@@ -3,12 +3,32 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChartBarIcon, GaugeIcon, TruckIcon, UsersIcon } from "@/components/shared/icons";
+import { useEffect } from "react";
+import { ChartBarIcon, GaugeIcon, TruckIcon, UsersIcon, XIcon } from "@/components/shared/icons";
 import { useLang } from "@/i18n/LangContext";
+import { useSidebar } from "@/lib/sidebar-context";
 
 export default function Sidebar() {
   const pathname = usePathname();
   const { t } = useLang();
+  const { isOpen, close } = useSidebar();
+
+  // Close the mobile drawer whenever the route changes (link taps should
+  // dismiss the overlay instead of leaving it open behind the new page).
+  useEffect(() => {
+    close();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  // Lock background scroll while the mobile drawer is open.
+  useEffect(() => {
+    if (!isOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isOpen]);
 
   const links = [
     { href: "/", label: t.sidebar.dashboard, icon: GaugeIcon, match: (p: string) => p === "/" },
@@ -33,15 +53,35 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="flex h-full w-64 shrink-0 flex-col border-r border-border bg-bg-panel">
+    <>
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-[1px] lg:hidden"
+          onClick={close}
+          aria-hidden="true"
+        />
+      )}
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 flex h-full w-64 max-w-[85vw] shrink-0 flex-col border-r border-border bg-bg-panel transition-transform duration-300 ease-panel lg:static lg:z-auto lg:translate-x-0 ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
       <div className="flex items-center gap-3 border-b border-border px-5 py-5">
-        <span className="flex size-9 items-center justify-center rounded-lg bg-gradient-to-br from-accent/25 to-accent/5 text-accent ring-1 ring-inset ring-accent/20">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent/25 to-accent/5 text-accent ring-1 ring-inset ring-accent/20">
           <TruckIcon className="size-4.5" />
         </span>
-        <div>
+        <div className="min-w-0 flex-1">
           <p className="text-sm font-semibold tracking-tight text-text">{t.sidebar.dispatch}</p>
           <p className="text-[11px] text-text-muted">{t.sidebar.dispatcherRole}</p>
         </div>
+        <button
+          type="button"
+          onClick={close}
+          aria-label={t.sidebar.closeMenu}
+          className="flex size-9 shrink-0 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-bg-hover hover:text-text lg:hidden"
+        >
+          <XIcon className="size-4.5" />
+        </button>
       </div>
 
       <nav className="flex flex-col gap-0.5 px-3 py-4">
@@ -92,6 +132,7 @@ export default function Sidebar() {
       <p className="border-t border-border px-4 py-3 text-center text-[10px] leading-relaxed text-text-muted">
         {t.sidebar.demoNotice}
       </p>
-    </aside>
+      </aside>
+    </>
   );
 }
