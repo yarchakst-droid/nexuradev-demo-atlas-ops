@@ -54,7 +54,7 @@ export default function StatusActionBar({
             type="button"
             disabled={pending !== null}
             onClick={() => handleClick(action.status)}
-            className="rounded-lg border px-3.5 py-2 text-xs font-medium transition-all hover:brightness-125 disabled:opacity-60"
+            className="pressable rounded-lg border px-3.5 py-2 text-xs font-medium hover:brightness-125 disabled:opacity-60"
             style={{
               borderColor: `color-mix(in srgb, ${action.color} 35%, transparent)`,
               backgroundColor: `color-mix(in srgb, ${action.color} 8%, transparent)`,
@@ -68,7 +68,7 @@ export default function StatusActionBar({
           type="button"
           disabled={pending !== null}
           onClick={() => handleClick("delivered")}
-          className="rounded-lg border border-accent/40 bg-accent-soft px-3.5 py-2 text-xs font-medium text-accent transition-all hover:brightness-125 disabled:opacity-60"
+          className="pressable rounded-lg border border-accent/40 bg-accent-soft px-3.5 py-2 text-xs font-medium text-accent hover:brightness-125 disabled:opacity-60"
         >
           {pending === "delivered" ? t.routeDetail.updating : t.routeDetail.markDelivered}
         </button>

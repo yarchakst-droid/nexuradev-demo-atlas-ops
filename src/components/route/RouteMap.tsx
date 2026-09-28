@@ -47,7 +47,7 @@ export default function RouteMap({
   }, [progressPercent, route]);
 
   return (
-    <div className="panel overflow-hidden rounded-xl border border-border">
+    <div className="panel overflow-hidden rounded-2xl border border-border">
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <div className="flex items-center gap-2 text-xs text-text-muted">
           <CompassIcon className="size-3.5" />
@@ -64,32 +64,9 @@ export default function RouteMap({
           <pattern id={`${glowId}-grid`} width="42" height="42" patternUnits="userSpaceOnUse">
             <path d="M 42 0 L 0 0 0 42" fill="none" stroke="var(--color-border-soft)" strokeWidth="1" />
           </pattern>
-          <radialGradient id={`${glowId}-terrain-a`} cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="var(--color-bg-elevated)" stopOpacity="0.7" />
-            <stop offset="100%" stopColor="var(--color-bg-elevated)" stopOpacity="0" />
-          </radialGradient>
-          <radialGradient id={`${glowId}-vignette`} cx="50%" cy="50%" r="72%">
-            <stop offset="60%" stopColor="black" stopOpacity="0" />
-            <stop offset="100%" stopColor="black" stopOpacity="0.55" />
-          </radialGradient>
-          <filter id={`${glowId}-blur`} x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="6" />
-          </filter>
         </defs>
 
         <rect width="1000" height="600" fill={`url(#${glowId}-grid)`} />
-        <ellipse cx="230" cy="470" rx="280" ry="110" fill={`url(#${glowId}-terrain-a)`} />
-        <ellipse cx="800" cy="90" rx="240" ry="100" fill={`url(#${glowId}-terrain-a)`} />
-
-        {/* soft glow of the route beneath the drawn line */}
-        <path
-          d={pathD(route)}
-          fill="none"
-          stroke={color}
-          strokeOpacity="0.35"
-          strokeWidth="8"
-          filter={`url(#${glowId}-blur)`}
-        />
 
         {/* faint full corridor */}
         <path d={pathD(route)} fill="none" stroke="var(--color-border)" strokeWidth="2" />
@@ -154,8 +131,6 @@ export default function RouteMap({
             <circle cx={truckPoint.x} cy={truckPoint.y} r="4.5" fill={color} stroke="var(--color-bg-panel)" strokeWidth="2" />
           </motion.g>
         )}
-
-        <rect width="1000" height="600" fill={`url(#${glowId}-vignette)`} className="pointer-events-none" />
       </svg>
     </div>
   );

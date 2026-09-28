@@ -58,7 +58,7 @@ export default function FleetView() {
 
   if (error) {
     return (
-      <p className="rounded-xl border border-critical/30 bg-critical/5 px-4 py-3 text-sm text-critical">{error}</p>
+      <p className="rounded-2xl border border-critical/30 bg-critical/5 px-4 py-3 text-sm text-critical">{error}</p>
     );
   }
 
@@ -66,7 +66,7 @@ export default function FleetView() {
     return (
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="h-64 animate-pulse rounded-xl border border-border bg-bg-panel" />
+          <div key={i} className="h-64 animate-pulse rounded-2xl border border-border bg-bg-panel" />
         ))}
       </div>
     );

@@ -51,7 +51,16 @@ export interface Dictionary {
     openMenuAria: string;
     notificationsAria: string;
     notificationsTitle: string;
-    notifications: string[];
+    alertsEmpty: string;
+    alertShipmentCritical: (code: string, route: string, minutes: number) => string;
+    alertShipmentDelayed: (code: string, route: string, minutes: number) => string;
+    alertVehicleFuel: (plate: string, percent: number) => string;
+    alertVehicleService: (plate: string, km: number) => string;
+    searchSectionShipments: string;
+    searchSectionDrivers: string;
+    searchSectionVehicles: string;
+    searchSectionPages: string;
+    searchNoResults: (query: string) => string;
     crumbDashboard: string;
     crumbRoute: string;
     crumbDrivers: string;
@@ -64,6 +73,7 @@ export interface Dictionary {
     loadError: string;
     emptyFiltered: string;
     emptySearch: (query: string) => string;
+    liveLabel: string;
   };
   kpi: {
     active: string;
@@ -120,6 +130,11 @@ export interface Dictionary {
     deliveries: string;
     onRouteNow: string;
     lastRoute: string;
+    backToDrivers: string;
+    plateLabel: string;
+    historyTitle: string;
+    historyEmpty: string;
+    vehicleSection: string;
   };
   timeline: {
     loading: string;
@@ -144,6 +159,7 @@ export interface Dictionary {
     kgUnit: string;
     truckType: string;
     vanType: string;
+    backToFleet: string;
   };
   reportsPage: {
     title: string;
@@ -189,11 +205,19 @@ const uk: Dictionary = {
     openMenuAria: "Відкрити меню",
     notificationsAria: "Сповіщення",
     notificationsTitle: "Сповіщення",
-    notifications: [
-      "Відправлення AO-10233 прострочено на 91 хв (Дніпро → Полтава)",
-      "Водій Ірина Ковальчук повідомила про затримку на маршруті AO-10232",
-      "Транспорт ІФ 2201 СХ потребує технічного обслуговування - пробіг до ТО 150 км",
-    ],
+    alertsEmpty: "Активних сповіщень немає.",
+    alertShipmentCritical: (code, route, minutes) =>
+      minutes > 0
+        ? `${code}: критичний стан, ${route}, запізнення ${minutes} хв`
+        : `${code}: критичний стан, ${route}`,
+    alertShipmentDelayed: (code, route, minutes) => `${code}: затримка ${minutes} хв, ${route}`,
+    alertVehicleFuel: (plate, percent) => `${plate}: мало пального, залишилось ${percent}%`,
+    alertVehicleService: (plate, km) => `${plate}: плановий сервіс через ${km} км`,
+    searchSectionShipments: "Відправлення",
+    searchSectionDrivers: "Водії",
+    searchSectionVehicles: "Автопарк",
+    searchSectionPages: "Розділи",
+    searchNoResults: (query) => `Нічого не знайдено за запитом «${query}»`,
     crumbDashboard: "Дашборд",
     crumbRoute: "Маршрут",
     crumbDrivers: "Водії",
@@ -206,6 +230,7 @@ const uk: Dictionary = {
     loadError: "Не вдалося завантажити відправлення.",
     emptyFiltered: "Немає відправлень з обраним статусом.",
     emptySearch: (query) => `Нічого не знайдено за запитом «${query}».`,
+    liveLabel: "Оновлюється автоматично",
   },
   kpi: {
     active: "Активні відправлення",
@@ -262,6 +287,11 @@ const uk: Dictionary = {
     deliveries: "доставок",
     onRouteNow: "Зараз у рейсі: ",
     lastRoute: "Останній рейс: ",
+    backToDrivers: "Водії",
+    plateLabel: "Держ. номер",
+    historyTitle: "Історія рейсів",
+    historyEmpty: "Рейсів за цим водієм поки немає.",
+    vehicleSection: "Закріплений транспорт",
   },
   timeline: {
     loading: "Завантаження",
@@ -286,6 +316,7 @@ const uk: Dictionary = {
     kgUnit: "кг",
     truckType: "Вантажівка",
     vanType: "Фургон",
+    backToFleet: "Автопарк",
   },
   reportsPage: {
     title: "Звіти",
@@ -331,11 +362,17 @@ const en: Dictionary = {
     openMenuAria: "Open menu",
     notificationsAria: "Notifications",
     notificationsTitle: "Notifications",
-    notifications: [
-      "Shipment AO-10233 is overdue by 91 min (Dnipro → Poltava)",
-      "Driver Irina Kovalchuk reported a delay on route AO-10232",
-      "Vehicle IF 2201 SH needs maintenance - 150 km left to service",
-    ],
+    alertsEmpty: "No active alerts.",
+    alertShipmentCritical: (code, route, minutes) =>
+      minutes > 0 ? `${code}: critical, ${route}, ${minutes} min overdue` : `${code}: critical, ${route}`,
+    alertShipmentDelayed: (code, route, minutes) => `${code}: delayed ${minutes} min, ${route}`,
+    alertVehicleFuel: (plate, percent) => `${plate}: low fuel, ${percent}% left`,
+    alertVehicleService: (plate, km) => `${plate}: service due in ${km} km`,
+    searchSectionShipments: "Shipments",
+    searchSectionDrivers: "Drivers",
+    searchSectionVehicles: "Fleet",
+    searchSectionPages: "Pages",
+    searchNoResults: (query) => `No matches for "${query}"`,
     crumbDashboard: "Dashboard",
     crumbRoute: "Route",
     crumbDrivers: "Drivers",
@@ -348,6 +385,7 @@ const en: Dictionary = {
     loadError: "Failed to load shipments.",
     emptyFiltered: "No shipments with the selected status.",
     emptySearch: (query) => `No matches for "${query}".`,
+    liveLabel: "Updating automatically",
   },
   kpi: {
     active: "Active shipments",
@@ -404,6 +442,11 @@ const en: Dictionary = {
     deliveries: "deliveries",
     onRouteNow: "On route now: ",
     lastRoute: "Last route: ",
+    backToDrivers: "Drivers",
+    plateLabel: "Plate",
+    historyTitle: "Route history",
+    historyEmpty: "No routes recorded for this driver yet.",
+    vehicleSection: "Assigned vehicle",
   },
   timeline: {
     loading: "Loading",
@@ -428,6 +471,7 @@ const en: Dictionary = {
     kgUnit: "kg",
     truckType: "Truck",
     vanType: "Van",
+    backToFleet: "Fleet",
   },
   reportsPage: {
     title: "Reports",
@@ -473,11 +517,19 @@ const ru: Dictionary = {
     openMenuAria: "Открыть меню",
     notificationsAria: "Уведомления",
     notificationsTitle: "Уведомления",
-    notifications: [
-      "Отправление AO-10233 просрочено на 91 мин (Днепр → Полтава)",
-      "Водитель Ирина Ковальчук сообщила о задержке на маршруте AO-10232",
-      "Транспорт IF 2201 SH требует технического обслуживания - пробег до ТО 150 км",
-    ],
+    alertsEmpty: "Активных уведомлений нет.",
+    alertShipmentCritical: (code, route, minutes) =>
+      minutes > 0
+        ? `${code}: критичное состояние, ${route}, опоздание ${minutes} мин`
+        : `${code}: критичное состояние, ${route}`,
+    alertShipmentDelayed: (code, route, minutes) => `${code}: задержка ${minutes} мин, ${route}`,
+    alertVehicleFuel: (plate, percent) => `${plate}: мало топлива, осталось ${percent}%`,
+    alertVehicleService: (plate, km) => `${plate}: плановое ТО через ${km} км`,
+    searchSectionShipments: "Отправления",
+    searchSectionDrivers: "Водители",
+    searchSectionVehicles: "Автопарк",
+    searchSectionPages: "Разделы",
+    searchNoResults: (query) => `Ничего не найдено по запросу «${query}»`,
     crumbDashboard: "Дашборд",
     crumbRoute: "Маршрут",
     crumbDrivers: "Водители",
@@ -490,6 +542,7 @@ const ru: Dictionary = {
     loadError: "Не удалось загрузить отправления.",
     emptyFiltered: "Нет отправлений с выбранным статусом.",
     emptySearch: (query) => `Ничего не найдено по запросу «${query}».`,
+    liveLabel: "Обновляется автоматически",
   },
   kpi: {
     active: "Активные отправления",
@@ -546,6 +599,11 @@ const ru: Dictionary = {
     deliveries: "доставок",
     onRouteNow: "Сейчас в рейсе: ",
     lastRoute: "Последний рейс: ",
+    backToDrivers: "Водители",
+    plateLabel: "Гос. номер",
+    historyTitle: "История рейсов",
+    historyEmpty: "Рейсов за этим водителем пока нет.",
+    vehicleSection: "Закреплённый транспорт",
   },
   timeline: {
     loading: "Погрузка",
@@ -570,6 +628,7 @@ const ru: Dictionary = {
     kgUnit: "кг",
     truckType: "Грузовик",
     vanType: "Фургон",
+    backToFleet: "Автопарк",
   },
   reportsPage: {
     title: "Отчёты",

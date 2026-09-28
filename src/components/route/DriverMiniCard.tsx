@@ -10,7 +10,7 @@ import type { Driver } from "@/lib/types";
 export default function DriverMiniCard({ driver }: { driver: Driver }) {
   const { t } = useLang();
   return (
-    <div className="panel rounded-xl border border-border p-4">
+    <div className="panel rounded-2xl border border-border p-4">
       <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-muted">{t.routeDetail.driverLabel}</p>
       <div className="flex items-center gap-3">
         <span className="relative block size-12 shrink-0 overflow-hidden rounded-full ring-2 ring-accent/25 ring-offset-2 ring-offset-bg-panel">

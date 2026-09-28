@@ -1,6 +1,7 @@
 "use client";
 
-import { FuelIcon, TruckIcon, WrenchIcon } from "@/components/shared/icons";
+import Link from "next/link";
+import { ChevronRightIcon, FuelIcon, TruckIcon, WrenchIcon } from "@/components/shared/icons";
 import { VehicleStatusBadge } from "@/components/shared/StatusBadge";
 import { useLang } from "@/i18n/LangContext";
 import type { Vehicle } from "@/lib/types";
@@ -24,19 +25,22 @@ export default function VehicleCard({
   const fuelColor = FUEL_COLOR(vehicle.fuelPercent);
 
   return (
-    <div className="panel flex flex-col gap-4 rounded-xl border border-border p-4 transition-transform duration-200 hover:-translate-y-0.5">
-      <div className="flex items-start gap-3">
-        <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent/25 to-accent/5 text-accent ring-1 ring-inset ring-accent/20">
+    <div className="panel group flex flex-col gap-4 rounded-2xl border border-border p-4 transition-colors duration-150 hover:border-text-muted/40">
+      <Link href={`/fleet/${vehicle.id}`} className="flex items-start gap-3">
+        <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent ring-1 ring-inset ring-accent/20">
           <TruckIcon className="size-4.5" />
         </span>
         <div className="min-w-0 flex-1 pt-0.5">
-          <p className="text-sm leading-snug font-medium text-text">{vehicle.model}</p>
+          <p className="flex items-center gap-1 text-sm leading-snug font-medium text-text group-hover:text-accent">
+            {vehicle.model}
+            <ChevronRightIcon className="size-3.5 text-text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-accent" />
+          </p>
           <p className="mt-1 truncate font-mono text-xs text-text-muted">{vehicle.plate}</p>
           <span className="mt-2 inline-block">
             <VehicleStatusBadge status={vehicle.status} />
           </span>
         </div>
-      </div>
+      </Link>
 
       <div className="grid grid-cols-2 gap-3 border-t border-border-soft pt-3 text-xs">
         <div>
@@ -84,7 +88,7 @@ export default function VehicleCard({
           type="button"
           disabled={!canToggle || toggling}
           onClick={() => onToggle(vehicle.id)}
-          className="flex items-center gap-1.5 rounded-md border border-border-soft px-2.5 py-1.5 text-[11px] text-text-soft transition-colors enabled:hover:border-accent/30 enabled:hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
+          className="pressable flex items-center gap-1.5 rounded-md border border-border-soft px-2.5 py-1.5 text-[11px] text-text-soft enabled:hover:border-accent/30 enabled:hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
         >
           <WrenchIcon className="size-3" />
           {vehicle.status === "maintenance" ? t.fleetPage.setToAvailable : t.fleetPage.setToMaintenance}

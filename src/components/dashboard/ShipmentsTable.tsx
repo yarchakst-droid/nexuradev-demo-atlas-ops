@@ -37,14 +37,14 @@ export default function ShipmentsTable({
 
   if (shipments.length === 0) {
     return (
-      <p className="rounded-xl border border-dashed border-border px-6 py-10 text-center text-sm text-text-muted">
+      <p className="rounded-2xl border border-dashed border-border px-6 py-10 text-center text-sm text-text-muted">
         {emptyMessage ?? t.dashboardPage.emptyFiltered}
       </p>
     );
   }
 
   return (
-    <div className="panel overflow-hidden rounded-xl border border-border">
+    <div className="panel overflow-hidden rounded-2xl border border-border">
       <div className="overflow-x-auto">
       <table className="w-full min-w-[640px] border-collapse text-sm">
         <thead>

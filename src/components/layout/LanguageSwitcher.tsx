@@ -19,7 +19,7 @@ export default function LanguageSwitcher({ className = "" }: { className?: strin
             type="button"
             onClick={() => setLang(option)}
             aria-label={`Atlas Ops: ${LANG_LABELS[option]}`}
-            className={`rounded px-2.5 py-1.5 text-[10px] font-semibold tracking-wide transition-colors ${
+            className={`pressable rounded px-2.5 py-1.5 text-[10px] font-semibold tracking-wide ${
               active ? "bg-accent-soft text-accent" : "text-text-muted hover:text-text-soft"
             }`}
           >

@@ -29,7 +29,7 @@ export default function StatusFilterTabs({
             key={opt.value}
             type="button"
             onClick={() => onChange(opt.value)}
-            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all ${
+            className={`pressable rounded-full border px-3.5 py-1.5 text-xs font-medium ${
               isActive
                 ? "border-accent/40 bg-accent-soft text-accent shadow-[0_0_0_1px_rgba(63,198,255,0.08)]"
                 : "border-border text-text-soft hover:border-border hover:bg-bg-hover hover:text-text"

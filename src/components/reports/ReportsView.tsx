@@ -41,7 +41,7 @@ export default function ReportsView() {
 
   if (error) {
     return (
-      <p className="rounded-xl border border-critical/30 bg-critical/5 px-4 py-3 text-sm text-critical">{error}</p>
+      <p className="rounded-2xl border border-critical/30 bg-critical/5 px-4 py-3 text-sm text-critical">{error}</p>
     );
   }
 
@@ -49,7 +49,7 @@ export default function ReportsView() {
     return (
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="h-56 animate-pulse rounded-xl border border-border bg-bg-panel" />
+          <div key={i} className="h-56 animate-pulse rounded-2xl border border-border bg-bg-panel" />
         ))}
       </div>
     );
@@ -70,7 +70,7 @@ export default function ReportsView() {
             { label: t.reportsPage.maintenance, value: data.fleetSummary.maintenance, color: "var(--color-delayed)" },
           ] as const
         ).map((tile) => (
-          <div key={tile.label} className="panel rounded-xl border border-border px-4 py-4">
+          <div key={tile.label} className="panel rounded-2xl border border-border px-4 py-4">
             <p className="font-mono text-[1.75rem] leading-none font-medium tabular-nums" style={{ color: tile.color }}>
               {tile.value}
             </p>
@@ -86,7 +86,7 @@ export default function ReportsView() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className="panel rounded-xl border border-border p-5">
+        <div className="panel rounded-2xl border border-border p-5">
           <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-text-muted">
             {t.reportsPage.statusBreakdown}
           </p>
@@ -109,7 +109,7 @@ export default function ReportsView() {
           </div>
         </div>
 
-        <div className="panel rounded-xl border border-border p-5">
+        <div className="panel rounded-2xl border border-border p-5">
           <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-text-muted">
             {t.reportsPage.topDrivers}
           </p>
@@ -131,7 +131,7 @@ export default function ReportsView() {
           </div>
         </div>
 
-        <div className="panel rounded-xl border border-border p-5 lg:col-span-2">
+        <div className="panel rounded-2xl border border-border p-5 lg:col-span-2">
           <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-text-muted">
             {t.reportsPage.topDestinations}
           </p>

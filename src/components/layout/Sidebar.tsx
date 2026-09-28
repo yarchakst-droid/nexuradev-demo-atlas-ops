@@ -67,7 +67,7 @@ export default function Sidebar() {
         }`}
       >
       <div className="flex items-center gap-3 border-b border-border px-5 py-5">
-        <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent/25 to-accent/5 text-accent ring-1 ring-inset ring-accent/20">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent ring-1 ring-inset ring-accent/20">
           <TruckIcon className="size-4.5" />
         </span>
         <div className="min-w-0 flex-1">
@@ -78,7 +78,7 @@ export default function Sidebar() {
           type="button"
           onClick={close}
           aria-label={t.sidebar.closeMenu}
-          className="flex size-9 shrink-0 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-bg-hover hover:text-text lg:hidden"
+          className="flex size-9 shrink-0 items-center justify-center pressable rounded-md text-text-muted hover:bg-bg-hover hover:text-text lg:hidden"
         >
           <XIcon className="size-4.5" />
         </button>
@@ -94,7 +94,7 @@ export default function Sidebar() {
             <Link
               key={href}
               href={href}
-              className={`group relative flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm transition-colors ${
+              className={`pressable group relative flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm ${
                 active
                   ? "bg-accent-soft text-accent"
                   : "text-text-soft hover:bg-bg-hover hover:text-text"

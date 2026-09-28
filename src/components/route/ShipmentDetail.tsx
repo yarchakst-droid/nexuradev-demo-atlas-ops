@@ -74,11 +74,11 @@ export default function ShipmentDetail({
             destination={shipment.destination[lang]}
           />
 
-          <div className="panel rounded-xl border border-border p-4">
+          <div className="panel rounded-2xl border border-border p-4">
             <StatusActionBar status={shipment.status} onUpdate={handleUpdateStatus} />
           </div>
 
-          <div className="panel rounded-xl border border-border p-4">
+          <div className="panel rounded-2xl border border-border p-4">
             <p className="mb-3 flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-text-muted">
               <PackageIcon className="size-3.5" />
               {t.routeDetail.cargoSection}
@@ -110,7 +110,7 @@ export default function ShipmentDetail({
 
         <aside className="flex flex-col gap-5">
           <DriverMiniCard driver={driver} />
-          <div className="panel rounded-xl border border-border p-4">
+          <div className="panel rounded-2xl border border-border p-4">
             <p className="mb-3 text-xs font-medium uppercase tracking-wide text-text-muted">{t.routeDetail.chronology}</p>
             <ShipmentTimeline timeline={shipment.timeline} />
           </div>
